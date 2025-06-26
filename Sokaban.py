@@ -60,7 +60,7 @@ def main():
                 if events.key == pygame.K_LEFT:
                     if(playmode):
                         if(board[xIdx - 1][yIdx] != 3):
-                            if(xIdx > 1 and board[xIdx - 1][yIdx] == 1):
+                            if(xIdx > 1 and board[xIdx - 1][yIdx] == 1 and board[xIdx - 2][yIdx] != 3):
                                 board[xIdx - 2][yIdx] = 1
                                 board[xIdx - 1][yIdx] = 0
                             if(xIdx > 0 and board[xIdx - 1][yIdx] != 1):
@@ -68,13 +68,13 @@ def main():
                             if(xIdx == -1):
                                 xIdx = 0
                     else:
-                        xIdx += 1
-                        if(xIdx == 10):
-                            xIdx = 9
+                        xIdx -= 1
+                        if(xIdx == -1):
+                            xIdx = 0
                 elif events.key == pygame.K_RIGHT:
                     if(playmode):
                         if(board[xIdx + 1][yIdx] != 3):
-                            if(xIdx < 8 and board[xIdx + 1][yIdx] == 1):
+                            if(xIdx < 8 and board[xIdx + 1][yIdx] == 1 and board[xIdx + 2][yIdx] != 3):
                                 board[xIdx + 2][yIdx] = 1
                                 board[xIdx + 1][yIdx] = 0
                             if(xIdx < 9 and board[xIdx + 1][yIdx] != 1):
@@ -88,7 +88,7 @@ def main():
                 elif events.key == pygame.K_UP:
                     if(playmode):
                         if(board[xIdx][yIdx - 1] != 3):
-                            if(yIdx > 1 and board[xIdx][yIdx - 1] == 1):
+                            if(yIdx > 1 and board[xIdx][yIdx - 1] == 1 and board[xIdx][yIdx - 2] != 3):
                                 board[xIdx][yIdx - 2] = 1
                                 board[xIdx][yIdx - 1] = 0
                             if(yIdx > 0 and board[xIdx][yIdx - 1] != 1):
@@ -102,7 +102,7 @@ def main():
                 elif events.key == pygame.K_DOWN:
                     if(playmode):
                         if(board[xIdx][yIdx + 1] != 3):
-                            if(yIdx < 8 and board[xIdx][yIdx + 1] == 1):
+                            if(yIdx < 8 and board[xIdx][yIdx + 1] == 1 and board[xIdx][yIdx + 2] != 3):
                                 board[xIdx][yIdx + 2] = 1
                                 board[xIdx][yIdx + 1] = 0
                             if(yIdx < 9 and board[xIdx][yIdx + 1] != 1):
