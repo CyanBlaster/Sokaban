@@ -26,6 +26,10 @@ def checkWin(holes, board):
 
 def main():
     grass = pygame.image.load('grass2.png')
+    box = pygame.image.load('box.png')
+    goal = pygame.image.load('Goal.png')
+    wall = pygame.image.load('wall.png')
+    player = pygame.image.load('player.png')
     cellWidth = 24
     cellHeight = 24
     width = 480
@@ -52,12 +56,12 @@ def main():
         for y in range(numCols):
             for x in range(numRows):
                 if(board[x][y] == 3):
-                    pygame.draw.rect(screen, (139, 69, 19), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
+                    screen.blit(wall, (x * cellWidth + 1, y * cellHeight + 1))
                 elif(board[x][y] == 1):
-                    pygame.draw.rect(screen, (0, 0, 255), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
+                    screen.blit(box, (x * cellWidth + 1, y * cellHeight + 1))
                 elif(board[x][y] == 0): 
                     if(holes[x][y] == 2):
-                        pygame.draw.rect(screen, (0, 255, 0), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
+                        screen.blit(goal, (x * cellWidth + 1, y * cellHeight + 1))
                     else:
                         screen.blit(grass, (x * cellWidth + 1, y * cellHeight + 1))
         if(playmode == False):
