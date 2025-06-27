@@ -56,8 +56,7 @@ def main():
                     pygame.draw.rect(screen, (0, 0, 255), (x * 50 + 1, y * 50 + 1, 49, 49))
         
         if(playmode == False):
-            pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
-            pygame.draw.rect(screen, (0, 0, 0), (xIdx * 50 + 2, yIdx * 50 + 2, 47, 47))      
+            pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49), 1, border_radius=1)
         else:
             pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
             
