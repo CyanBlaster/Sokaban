@@ -25,6 +25,7 @@ def checkWin(holes, board):
     return True
 
 def main():
+    grass = pygame.image.load('grass1.png')
     width = 501
     height = 501
     screen = pygame.display.set_mode((width, height))
@@ -54,6 +55,8 @@ def main():
                     pygame.draw.rect(screen, (0, 255, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
                 if(board[x][y] == 1):
                     pygame.draw.rect(screen, (0, 0, 255), (x * 50 + 1, y * 50 + 1, 49, 49))
+                if(board[x][y] == 0):
+                    screen.blit(grass, (x * 50 + 1, y * 50 + 1))
         
         if(playmode == False):
             pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49), 1, border_radius=1)
