@@ -16,6 +16,13 @@ def createVerticalLine(board, x, y, length):
         for i in range(length):
             board[x][y + i] = 3
 
+def checkWin(holes, board):
+    for y in range(10):
+            for x in range(10):
+                if(holes[x][y] == 2):
+                    if(board[x][y] != 1):
+                        return False
+    return True
 
 def main():
     width = 501
@@ -29,14 +36,15 @@ def main():
     holes = ZeroField(10)
     select = False
     while running:
+        if(playmode):
+            if(checkWin(holes, board)):
+                running = False
+
         pygame.display.flip()
         screen.fill((0, 0, 0))
         for i in range(0, 10):
             pygame.draw.line(screen, (0, 0, 255), (i * 500/10, 0), (i * 500/10, 500))
             pygame.draw.line(screen, (0, 0, 255), (0, i * 500/10), (500, i * 500/10))
-        
-        
-
         
         for y in range(10):
             for x in range(10):
@@ -61,7 +69,7 @@ def main():
                 if events.key == pygame.K_LEFT:
                     if(playmode):
                         if(board[xIdx - 1][yIdx] != 3):
-                            if(xIdx > 1 and board[xIdx - 1][yIdx] == 1 and board[xIdx - 2][yIdx] != 3):
+                            if(xIdx > 1 and board[xIdx - 1][yIdx] == 1 and board[xIdx - 2][yIdx] != 3 and board[xIdx - 2][yIdx] != 1):
                                 board[xIdx - 2][yIdx] = 1
                                 board[xIdx - 1][yIdx] = 0
                             if(xIdx > 0 and board[xIdx - 1][yIdx] != 1):
@@ -75,7 +83,7 @@ def main():
                 elif events.key == pygame.K_RIGHT:
                     if(playmode):
                         if(board[xIdx + 1][yIdx] != 3):
-                            if(xIdx < 8 and board[xIdx + 1][yIdx] == 1 and board[xIdx + 2][yIdx] != 3):
+                            if(xIdx < 8 and board[xIdx + 1][yIdx] == 1 and board[xIdx + 2][yIdx] != 3 and board[xIdx + 2][yIdx] != 1):
                                 board[xIdx + 2][yIdx] = 1
                                 board[xIdx + 1][yIdx] = 0
                             if(xIdx < 9 and board[xIdx + 1][yIdx] != 1):
@@ -89,7 +97,7 @@ def main():
                 elif events.key == pygame.K_UP:
                     if(playmode):
                         if(board[xIdx][yIdx - 1] != 3):
-                            if(yIdx > 1 and board[xIdx][yIdx - 1] == 1 and board[xIdx][yIdx - 2] != 3):
+                            if(yIdx > 1 and board[xIdx][yIdx - 1] == 1 and board[xIdx][yIdx - 2] != 3 and board[xIdx][yIdx - 2] != 1):
                                 board[xIdx][yIdx - 2] = 1
                                 board[xIdx][yIdx - 1] = 0
                             if(yIdx > 0 and board[xIdx][yIdx - 1] != 1):
@@ -103,7 +111,7 @@ def main():
                 elif events.key == pygame.K_DOWN:
                     if(playmode):
                         if(board[xIdx][yIdx + 1] != 3):
-                            if(yIdx < 8 and board[xIdx][yIdx + 1] == 1 and board[xIdx][yIdx + 2] != 3):
+                            if(yIdx < 8 and board[xIdx][yIdx + 1] == 1 and board[xIdx][yIdx + 2] != 3 and board[xIdx][yIdx + 2] != 1):
                                 board[xIdx][yIdx + 2] = 1
                                 board[xIdx][yIdx + 1] = 0
                             if(yIdx < 9 and board[xIdx][yIdx + 1] != 1):
@@ -117,28 +125,21 @@ def main():
                             yIdx = 9
                 elif events.key == pygame.K_d:
                     if(playmode == False):
-                        for y in range(10):
-                            for x in range(10):
-                                if(holes[x][y] == 2):
-                                    pygame.draw.rect(screen, (0, 0, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
-                                    holes[x][y] = 0
                         holes[xIdx][yIdx] = 2
                 elif events.key == pygame.K_f:
                     if(playmode == False):
-                        for y in range(10):
-                            for x in range(10):
-                                if(board[x][y] == 1):
-                                    pygame.draw.rect(screen, (0, 0, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
-                                    board[x][y] = 0
                         board[xIdx][yIdx] = 1
                 elif events.key == pygame.K_s:
                      if(playmode == False):
                         board[xIdx][yIdx] = 3
                 elif events.key == pygame.K_a:
                              if(playmode == False):
-                                if(board[xIdx][yIdx] == 3):
+                                if(board[xIdx][yIdx] != 0):
                                     pygame.draw.rect(screen, (0, 0, 0), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
                                     board[xIdx][yIdx] = 0
+                                elif(holes[xIdx][yIdx] != 0):
+                                    pygame.draw.rect(screen, (0, 0, 0), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
+                                    holes[xIdx][yIdx] = 0
                 elif events.key == pygame.K_p:
                     if(playmode):
                         playmode = False
