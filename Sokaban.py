@@ -67,7 +67,7 @@ def main():
         if(playmode == False):
             pygame.draw.rect(screen, (255, 255, 255), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1), 1, border_radius=1)
         else:
-            pygame.draw.rect(screen, (255, 255, 255), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1))
+            screen.blit(player, (xIdx * cellWidth + 1, yIdx * cellHeight + 1))
             
         
         for events in pygame.event.get():
