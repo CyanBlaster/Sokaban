@@ -26,6 +26,8 @@ def checkWin(holes, board):
 
 def main():
     grass = pygame.image.load('grass1.png')
+    cellWidth = 16
+    cellHeight = 16
     width = 501
     height = 501
     screen = pygame.display.set_mode((width, height))
@@ -43,25 +45,25 @@ def main():
 
         pygame.display.flip()
         screen.fill((0, 0, 0))
-        for i in range(0, 10):
-            pygame.draw.line(screen, (0, 0, 255), (i * 500/10, 0), (i * 500/10, 500))
-            pygame.draw.line(screen, (0, 0, 255), (0, i * 500/10), (500, i * 500/10))
+        # for i in range(0, 10):
+        #     pygame.draw.line(screen, (0, 0, 255), (i * cellWidth, 0), (i * cellHeight, 500))
+        #     pygame.draw.line(screen, (0, 0, 255), (0, i * cellWidth), (500, i * cellHeight))
         
         for y in range(10):
             for x in range(10):
                 if(board[x][y] == 3):
-                    pygame.draw.rect(screen, (139, 69, 19), (x * 50 + 1, y * 50 + 1, 49, 49))
+                    pygame.draw.rect(screen, (139, 69, 19), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                 if(holes[x][y] == 2):
-                    pygame.draw.rect(screen, (0, 255, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
+                    pygame.draw.rect(screen, (0, 255, 0), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                 if(board[x][y] == 1):
-                    pygame.draw.rect(screen, (0, 0, 255), (x * 50 + 1, y * 50 + 1, 49, 49))
+                    pygame.draw.rect(screen, (0, 0, 255), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                 if(board[x][y] == 0):
-                    screen.blit(grass, (x * 50 + 1, y * 50 + 1))
+                    screen.blit(grass, (x * cellWidth + 1, y * cellHeight + 1))
         
         if(playmode == False):
-            pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49), 1, border_radius=1)
+            pygame.draw.rect(screen, (255, 255, 255), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1), 1, border_radius=1)
         else:
-            pygame.draw.rect(screen, (255, 255, 255), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
+            pygame.draw.rect(screen, (255, 255, 255), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1))
             
         
         for events in pygame.event.get():
@@ -137,10 +139,10 @@ def main():
                 elif events.key == pygame.K_a:
                              if(playmode == False):
                                 if(board[xIdx][yIdx] != 0):
-                                    pygame.draw.rect(screen, (0, 0, 0), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
+                                    pygame.draw.rect(screen, (0, 0, 0), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                                     board[xIdx][yIdx] = 0
                                 elif(holes[xIdx][yIdx] != 0):
-                                    pygame.draw.rect(screen, (0, 0, 0), (xIdx * 50 + 1, yIdx * 50 + 1, 49, 49))
+                                    pygame.draw.rect(screen, (0, 0, 0), (xIdx * cellWidth + 1, yIdx * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                                     holes[xIdx][yIdx] = 0
                 elif events.key == pygame.K_p:
                     if(playmode):
@@ -156,7 +158,7 @@ def main():
                             for y in range(10):
                                for x in range(10):
                                    if(board[x][y] == 1):
-                                      pygame.draw.rect(screen, (0, 0, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
+                                      pygame.draw.rect(screen, (0, 0, 0), (x * cellWidth + 1, y * cellHeight + 1, cellWidth - 1, cellHeight - 1))
                                       board[x][y] = 0
                             board[xIdx][yIdx] = 1
                         else:
