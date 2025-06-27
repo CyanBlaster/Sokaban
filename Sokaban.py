@@ -26,6 +26,7 @@ def main():
     yIdx = 2
     playmode = False
     board = ZeroField(10)
+    holes = ZeroField(10)
     select = False
     while running:
         pygame.display.flip()
@@ -41,7 +42,7 @@ def main():
             for x in range(10):
                 if(board[x][y] == 3):
                     pygame.draw.rect(screen, (139, 69, 19), (x * 50 + 1, y * 50 + 1, 49, 49))
-                if(board[x][y] == 2):
+                if(holes[x][y] == 2):
                     pygame.draw.rect(screen, (0, 255, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
                 if(board[x][y] == 1):
                     pygame.draw.rect(screen, (0, 0, 255), (x * 50 + 1, y * 50 + 1, 49, 49))
@@ -118,10 +119,10 @@ def main():
                     if(playmode == False):
                         for y in range(10):
                             for x in range(10):
-                                if(board[x][y] == 2):
+                                if(holes[x][y] == 2):
                                     pygame.draw.rect(screen, (0, 0, 0), (x * 50 + 1, y * 50 + 1, 49, 49))
-                                    board[x][y] = 0
-                        board[xIdx][yIdx] = 2
+                                    holes[x][y] = 0
+                        holes[xIdx][yIdx] = 2
                 elif events.key == pygame.K_f:
                     if(playmode == False):
                         for y in range(10):
